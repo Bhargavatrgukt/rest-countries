@@ -11,13 +11,13 @@ const InputContainer = (props) => {
                 type="search"
                 placeholder="Search for a country..."
                 className="p-3 px-12 sm:px-14 sm:w-96 border rounded-md focus:outline-none shadow-md w-full"
-                onChange={(event)=>handleSearch(event)}
+                onChange={(event)=>handleSearch(event.target.value)}
             />
         </div>
         <select
         name="Region"
         defaultValue=""
-        className="p-3 border rounded-md focus:outline-none bg-white shadow-md sm:pl-4 sm:pr-6 max-[425px]:w-[65%] max-[425px]:px-5 " onChange={(event)=>filterRegions(event)}
+        className="p-3 border rounded-md focus:outline-none bg-white shadow-md sm:pl-4 sm:pr-6 max-[425px]:w-[65%] max-[425px]:px-5 " onChange={(event)=>filterRegions(event.target.value)}
         >
             <option value="">
                 Filter by Region

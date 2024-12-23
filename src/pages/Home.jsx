@@ -1,59 +1,135 @@
 import React, { useEffect, useState } from "react";
-import { IoIosSearch } from "react-icons/io";
+import InputContainer from "../components/InputContainer";
+import Country from "../components/Country";
+import PacmanLoader from "react-spinners/PacmanLoader";
+import { searchCountryByRegion, searchCountryName } from "../utils/filterCountries";
 
 const Home = () => {
-  // const [countriesData, handleCountriesData] = useState([]); // Start with `null` instead of `{}`
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch("https://restcountries.com/v3.1/all", { mode: "cors" }); //I got issue here then I add cors 
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! Status: ${response.status}`);
-  //     }
-  //     const data = await response.json();
-  //     // console.log(data[1].flags.png);
-  //     handleCountriesData(data);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // if (!countriesData) {
-  //   return <div>Loading...</div>;
-  // }
-
-  return (
-    <div className="sm:p-20">
-    <div className="flex sm:justify-between max-[425px]:flex-col p-4 pt-6">
-      <div className="relative flex items-center max-[425px]:w-full max-[425px]:pb-5">
-        <IoIosSearch className="text-xl absolute left-4 text-gray-500" />
-        <input
-          type="search"
-          placeholder="Search for a country..."
-          className="p-3 px-12 sm:px-14 sm:w-96 border rounded-md focus:outline-none shadow-md w-full"
-        />
-      </div>
+    const [countriesData, setCountriesData] = useState([]); 
+    const [originalCountriesData, setOriginalCountriesData] = useState([]);
+    const [searchInput, setSearchInput] = useState("");
+    const [selectedRegion, setSelectedRegion] = useState("");
+    const [error, setError] = useState(null);
+    const [loading,setLoading]=useState(true)
   
-      {/* Region Filter Dropdown */}
-      <select
-        name="Region"
-        defaultValue=""
-        className="p-3 border rounded-md focus:outline-none bg-white shadow-md sm:pl-4 sm:pr-6 max-[425px]:w-[65%] max-[425px]:px-5 "
-      >
-        <option value="" disabled hidden>
-          Filter by Region
-        </option>
-        <option value="Africa">Africa</option>
-        <option value="America">America</option>
-        <option value="Asia">Asia</option>
-        <option value="Europe">Europe</option>
-        <option value="Oceania">Oceania</option>
-      </select>
-    </div>
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://restcountries.com/v3.1/all");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setLoading(false)
+        setCountriesData(data);
+        setOriginalCountriesData(data);
+        setError(null);
+      } catch (error) {
+        setLoading(false)
+        setError("Error in fetching data , check api");
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    useEffect(() => {
+      fetchData();
+    }, []);
+    
+
+    
+    
+    // const updateFilteredData = () => {
+    //   let filteredData = originalCountriesData;
+    
+    //   if (searchInput) {
+    //     filteredData = searchCountryName(filteredData, searchInput.toLowerCase());
+    //   }
+    
+    //   if (selectedRegion) {
+    //     filteredData = searchCountryByRegion(filteredData, selectedRegion);
+    //   }
+    
+    //   setCountriesData(filteredData);
+    // };
+    
+    // const searchCountries = (event) => {
+    //   setSearchInput(event.target.value);
+    //   updateFilteredData();
+    // };
+    
+    // const filterRegions= (event) => {
+    //   console.log(event.target.value)
+    //   setSelectedRegion(event.target.value);
+    //   updateFilteredData();
+    // };
+    
+
+    useEffect(() => {
+      let filteredData = originalCountriesData;
+  
+      if (searchInput) {
+        filteredData = searchCountryName(filteredData, searchInput.toLowerCase());
+      }
+  
+      if (selectedRegion) {
+        filteredData = searchCountryByRegion(filteredData, selectedRegion);
+        // Extract unique subregions for the selected region (if needed)
+        // const uniqueSubregions = [
+        //   ...new Set(
+        //     filteredData.map((country) => country.subregion).filter(Boolean)
+        //   ),
+        // ];
+        // setSubregions(uniqueSubregions); // Uncomment if subregions are implemented
+      }
+  
+      // Additional filters (like subregion) can be added here
+      // if (selectedSubregion) {
+      //   filteredData = filterBySubregion(filteredData, selectedSubregion);
+      // }
+  
+      setCountriesData(filteredData);
+    }, [searchInput, selectedRegion]);
+  
+    const searchCountries = (event) => {
+      setSearchInput(event.target.value);
+    };
+  
+    const filterRegions = (event) => {
+      setSelectedRegion(event.target.value);
+    };
+  
+
+
+    if (error) {
+      return (
+        <div className="text-center font-semibold text-red-500">
+          {error}
+        </div>
+      );
+    }
+
+
+    // console.log(countriesData.length) 
+    if (loading) {
+      return (
+        <div className="flex justify-center items-center h-screen">
+          <PacmanLoader
+            loading={loading}
+            color="#36d7b7" 
+            size={25} 
+          />
+        </div>
+      );
+    }
+  
+  return (
+    <div className="lg:p-20">
+      <InputContainer handleSearch={searchCountries} filterRegions={filterRegions}/>
+      {countriesData.length===0 && <h1 className="text-center text-black">Country Not Found</h1>}
+      <ul className="list-none grid grid-cols-1 sm:grid-cols-4 lg:gap-16 md:gap-3 p-4 ">
+         {countriesData.map((country,index)=>(
+           <Country key={index} country={country}/>
+         ))}
+      </ul>
   </div>
   
   );

@@ -4,7 +4,7 @@ import { IoIosSearch } from "react-icons/io";
 
 const InputContainer = (props) => {
     const {handleSearch,filterRegions,subRegions,changeSubRegion,changeCriteria}=props;
-    const regions=["Africa","Americas","Asia","Europe","Oceania"]
+    const regions=["Africa","Americas","Antarctic","Asia","Europe","Oceania"]
     const criteria=["Population (low-high)","Population (high-low)","Area (low-high)","Area (high-low)"]
   return (
     <div className="flex sm:justify-between max-[425px]:flex-col p-4 pt-6">

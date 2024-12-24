@@ -15,7 +15,11 @@ export const DataProvider = ({ children }) => {
       try {
   
         const apiUrl = "https://restcountries.com/v3.1/all";
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl,{
+          headers: {
+            "Upgrade-Insecure-Requests": "1",
+          },
+        });
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

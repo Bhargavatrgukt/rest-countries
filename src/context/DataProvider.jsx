@@ -13,9 +13,9 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const proxyUrl = "https://api.allorigins.win/raw?url=";
+  
         const apiUrl = "https://restcountries.com/v3.1/all";
-        const response = await fetch(proxyUrl+apiUrl);
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

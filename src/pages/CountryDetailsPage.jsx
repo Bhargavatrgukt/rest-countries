@@ -54,7 +54,7 @@ const CountryDetailsPage = () => {
     const borderSet = new Set(countryDetails.borders);
     const borders = countriesData.filter((country) => borderSet.has(country.cca3));
 
-    const renderDetails = (details) =>
+    const getDetails = (details) =>
         details.map(([label, value]) => (
           <li key={label}>
             <strong>{label}: </strong>
@@ -64,19 +64,19 @@ const CountryDetailsPage = () => {
     
 
   return (
-    <div>
+    <div className='dark:bg-veryDarkBlue-bg dark:h-screen p-20'>
       <Button content={"Back"} />
       <div className="flex flex-col lg:flex-row items-center lg:gap-20 lg:items-start xl:justify-center">
         <CountryFlag
           countryFlag={countryDetails.flags}
         />
-        <div className="lg:max-w-lg text-very-dark-blue  leading-loose">
-          <h1 className="text-2xl font-bold mb-4 mt-6 lg:mt-0  sm:text-center lg:text-start">
+        <div className="lg:max-w-lg text-veryDarkBlue-text dark:text-white  leading-loose">
+          <h1 className="text-2xl font-bold mb-4 mt-6 lg:mt-0  sm:text-center lg:text-start dark:">
             {countryDetails.name.common}
           </h1>
           <div className="flex flex-col sm:flex-row sm:justify-center md:flex-row gap-6 lg:text-start lg:justify-start md:justify-center lg:w-full">
-            <ul className="list-none lg:w-1/2">{renderDetails(detailsLeft)}</ul>
-            <ul className="list-none ">{renderDetails(detailsRight)}</ul>
+            <ul className="list-none lg:w-1/2">{getDetails(detailsLeft)}</ul>
+            <ul className="list-none ">{getDetails(detailsRight)}</ul>
           </div>
           <BorderCountries data={countriesData} borders={borders} />
         </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Link } from "react-router-dom";
 
 import InputContainer from "../components/InputContainer";
@@ -6,6 +6,7 @@ import Country from "../components/Country";
 import PacmanLoader from "react-spinners/PacmanLoader";
 import {filterCountries} from "../utils/filterCountries";
 import { useData } from "../context/DataProvider";
+
 
 const Home = () => {
     // const [countriesData, setCountriesData] = useState([]); 
@@ -17,6 +18,8 @@ const Home = () => {
     // const [loading,setLoading]=useState(true)
 
     const {countriesData,error,loading}=useData()
+  
+
 
     let subRegions = Array.from(
       new Set(
@@ -73,7 +76,7 @@ const Home = () => {
     }
   
   return (
-    <div className="lg:p-20">
+    <div className="lg:p-20 dark:bg-veryDarkBlue-bg">
       <InputContainer handleSearch={setSearchInput} filterRegions={filterRegions} subRegions={subRegions} changeSubRegion={changeSubRegion} changeCriteria={changeCriteria}/>
       {updatedCountriesData.length===0 && <h1 className="text-center text-black">Country Not Found</h1>}
       <ul className="list-none grid grid-cols-1 sm:grid-cols-4 lg:gap-16 md:gap-3 p-4" >

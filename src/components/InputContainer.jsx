@@ -9,11 +9,11 @@ const InputContainer = (props) => {
   return (
     <div className="flex sm:justify-between max-[425px]:flex-col p-4 pt-6">
         <div className="relative flex items-center max-[425px]:w-full max-[425px]:pb-5">
-            <IoIosSearch className="text-xl absolute left-4 text-gray-500" />
+            <IoIosSearch className="text-xl absolute left-4 text-gray-500 dark:text-white" />
             <input
                 type="search"
                 placeholder="Search for a country..."
-                className="p-3 px-12 sm:px-14 sm:w-96 border rounded-md focus:outline-none shadow-md w-full"
+                className="p-3 px-12 sm:px-14 sm:w-96 border rounded-md focus:outline-none shadow-md w-full  dark:bg-darkBlue dark:border-0  dark:text-white"
                 onChange={(event)=>handleSearch(event.target.value)}
             />
         </div>

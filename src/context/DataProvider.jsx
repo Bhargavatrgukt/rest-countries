@@ -13,7 +13,9 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://restcountries.com/v3.1/all");
+        const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+        const apiUrl = "https://restcountries.com/v3.1/all";
+        const response = await fetch(proxyUrl+apiUrl);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

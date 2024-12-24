@@ -8,8 +8,22 @@ const Home = () => {
     const [countriesData, setCountriesData] = useState([]); 
     const [searchInput, setSearchInput] = useState("");
     const [selectedRegion, setSelectedRegion] = useState("");
+    const [selectSubRegion,setSubRegion]=useState("");
+    const [selectCriteria,setCriteria]=useState("");
     const [error, setError] = useState(null);
     const [loading,setLoading]=useState(true)
+
+    let subRegions = Array.from(
+      new Set(
+        countriesData
+          .filter((country) => country.region === selectedRegion)
+          .map((country) => country.subregion)
+          .filter(Boolean)
+      )
+    );
+    
+
+    // console.log(subRegions)
   
   
     useEffect(() => {
@@ -31,7 +45,19 @@ const Home = () => {
       };
       fetchData();
     }, []);
+
+    const filterRegions=(event)=>{
+      setSelectedRegion(event.target.value);
+      setSubRegion("")
+    }
     
+    const changeSubRegion=(event)=>{
+      setSubRegion(event.target.value)
+    }
+
+    const changeCriteria=(event)=>{
+      setCriteria(event.target.value)
+    }
 
     if (error) {
       return (
@@ -42,7 +68,7 @@ const Home = () => {
     }
 
    
-    const updatedCountriesData = filterCountries(countriesData,searchInput, selectedRegion);
+    const updatedCountriesData = filterCountries(countriesData,searchInput, selectedRegion,selectSubRegion,selectCriteria);
 
     // console.log(updatedCountriesData)
 
@@ -60,7 +86,7 @@ const Home = () => {
   
   return (
     <div className="lg:p-20">
-      <InputContainer handleSearch={setSearchInput} filterRegions={setSelectedRegion}/>
+      <InputContainer handleSearch={setSearchInput} filterRegions={filterRegions} subRegions={subRegions} changeSubRegion={changeSubRegion} changeCriteria={changeCriteria}/>
       {updatedCountriesData.length===0 && <h1 className="text-center text-black">Country Not Found</h1>}
       <ul className="list-none grid grid-cols-1 sm:grid-cols-4 lg:gap-16 md:gap-3 p-4 ">
          {updatedCountriesData.map((country,index)=>(

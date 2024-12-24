@@ -1,8 +1,11 @@
 import React from 'react'
+import DropDown from './DropDown';
 import { IoIosSearch } from "react-icons/io";
 
 const InputContainer = (props) => {
-    const {handleSearch,filterRegions}=props;
+    const {handleSearch,filterRegions,subRegions,changeSubRegion,changeCriteria}=props;
+    const regions=["Africa","Americas","Asia","Europe","Oceania"]
+    const criteria=["Population (low-high)","Population (high-low)","Area (low-high)","Area (high-low)"]
   return (
     <div className="flex sm:justify-between max-[425px]:flex-col p-4 pt-6">
         <div className="relative flex items-center max-[425px]:w-full max-[425px]:pb-5">
@@ -14,20 +17,27 @@ const InputContainer = (props) => {
                 onChange={(event)=>handleSearch(event.target.value)}
             />
         </div>
-        <select
-        name="Region"
+          <DropDown 
+              name="criteria"
+              options={criteria}
+              defaultValue=""
+            onChange={changeCriteria}
+          />  
+        {
+          subRegions.length !==0 &&
+          <DropDown 
+              name="subRegion"
+              options={subRegions}
+              defaultValue=""
+            onChange={changeSubRegion}
+          />  
+        }
+        <DropDown
+        name="region"
+        options={regions}
         defaultValue=""
-        className="p-3 border rounded-md focus:outline-none bg-white shadow-md sm:pl-4 sm:pr-6 max-[425px]:w-[65%] max-[425px]:px-5 " onChange={(event)=>filterRegions(event.target.value)}
-        >
-            <option value="">
-                Filter by Region
-            </option>
-            <option value="Africa">Africa</option>
-            <option value="America">America</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
-            <option value="Oceania">Oceania</option>
-        </select>
+        onChange={filterRegions}
+       />
   </div>
   )
 }

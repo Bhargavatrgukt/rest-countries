@@ -13,7 +13,7 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+        const proxyUrl = "https://api.allorigins.win/raw?url=";
         const apiUrl = "https://restcountries.com/v3.1/all";
         const response = await fetch(proxyUrl+apiUrl);
         if (!response.ok) {

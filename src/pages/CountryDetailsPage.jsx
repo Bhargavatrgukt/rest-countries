@@ -64,7 +64,7 @@ const CountryDetailsPage = () => {
     
 
   return (
-    <div className='dark:bg-veryDarkBlue-bg dark:h-screen p-20'>
+    <div className='dark:bg-veryDarkBlue-bg  p-20 bg-veryLightGray h-screen'>
       <Button content={"Back"} />
       <div className="flex flex-col lg:flex-row items-center lg:gap-20 lg:items-start xl:justify-center">
         <CountryFlag

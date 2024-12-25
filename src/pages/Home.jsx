@@ -76,7 +76,7 @@ const Home = () => {
     }
   
   return (
-    <div className="lg:p-20 dark:bg-veryDarkBlue-bg bg-veryLightGray">
+    <div className="lg:p-20 dark:bg-veryDarkBlue-bg min-h-screen bg-veryLightGray">
       <InputContainer handleSearch={setSearchInput} filterRegions={filterRegions} subRegions={subRegions} changeSubRegion={changeSubRegion} changeCriteria={changeCriteria}/>
       {updatedCountriesData.length===0 && <h1 className="text-center text-black">Country Not Found</h1>}
       <ul className="list-none grid grid-cols-1 sm:grid-cols-4 lg:gap-16 md:gap-3 p-4" >

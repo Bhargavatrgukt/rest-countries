@@ -28,7 +28,7 @@ const CountryDetailsPage = () => {
           <div className="flex justify-center items-center h-screen">
             <PacmanLoader
               loading={loading}
-              color="#36d7b7" 
+              color="#080808"
               size={25} 
             />
           </div>

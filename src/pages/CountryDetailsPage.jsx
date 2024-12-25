@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { useData } from '../context/DataProvider'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import Button from '../components/Button';
 import CountryFlag from '../components/countryFlag';
@@ -12,6 +12,7 @@ const CountryDetailsPage = () => {
     const {countriesData,error,loading}=useData()
     const params=useParams()
     const countryName=params.countryName
+    const navigate = useNavigate()
 
 
     if (error) {
@@ -34,7 +35,12 @@ const CountryDetailsPage = () => {
         );
       } 
 
-    const countryDetails=countriesData.find((country)=>country.name.common===countryName)
+    const countryDetails=countriesData.find((country)=>country.name.common===countryName) 
+
+    if(countryDetails===undefined){
+      navigate("*");
+      return null;
+    } 
     
     const nativeNameKeys = Object.keys(countryDetails.name.nativeName);
     const detailsLeft = [

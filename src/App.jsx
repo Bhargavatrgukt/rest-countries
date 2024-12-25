@@ -4,6 +4,7 @@ import  Header from "./components/Header"
 import { DataProvider } from "./context/DataProvider"
 import { ThemeProvider } from "./context/ThemeContext"
 import CountryDetailsPage from "./pages/CountryDetailsPage"
+import NotFound from "./components/NotFound"
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Routes>
               <Route path="/" element={ <Home />}/>
               <Route path="/country/:countryName" element={<CountryDetailsPage />} />
+              <Route path="*" element={<NotFound />} />
           </Routes>
         </DataProvider>
      </ThemeProvider>

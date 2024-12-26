@@ -1,8 +1,32 @@
-# React + Vite
+# Rest Countries Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React.js application that displays information about countries around the world using the [REST Countries API](https://restcountries.com/v3.1/all). The application is styled using **Tailwind CSS**.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Search**: Search for countries by name.
+- **Filter**: Filter countries by region and sub regions.
+- **sorting**:sorting by criteria like population and area
+- **Country Details**: View detailed information about a selected country, including:
+  - Population
+  - Region
+  - Subregion
+  - Capital
+  - Borders
+  - Languages
+  - Currency
+- **Responsive Design**: Fully responsive layout for an excellent user experience on any device.
+
+## Demo
+
+[My deployment Link](https://rest-countries-kappa-six.vercel.app/)
+
+## Installation
+
+Follow these steps to set up and run the project locally:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Bhargavatrgukt/rest-countries
+   cd rest-countries
+   ```
